@@ -1,8 +1,8 @@
 # Environment variable files
-.env
+Server/.env
 
 # Node modules
-node_modules/
+Server/node_modules/
 
 # Logs
 logs/
@@ -14,7 +14,6 @@ yarn-error.log*
 # Dependency directories
 /.pnp
 .pnp.js
-.env
 
 # Build directories
 dist/
