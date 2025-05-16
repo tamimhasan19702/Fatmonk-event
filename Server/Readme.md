@@ -49,116 +49,98 @@ Edit
 
 ## 📦 Installation
 
-git clone https://github.com/yourusername/event-api.git
-cd event-api
-npm install
-🔐 Environment Variables
-Create a .env file in the root:
+## Setup Instructions
 
-env
-Copy
-Edit
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-🧪 Running the Server
-bash
-Copy
-Edit
-npm run dev
-🔌 API Endpoints
-✅ Auth Routes /api/auth
-Register User
-http
-Copy
-Edit
-POST /api/auth/register
-Body (JSON):
+1. **Clone the Repository**
 
-json
-Copy
-Edit
-{
-"name": "John Doe",
-"email": "john@example.com",
-"password": "123456"
-}
-Login User
-http
-Copy
-Edit
-POST /api/auth/login
-Body (JSON):
+   ```bash
+   git clone https://github.com/tamimhasan19702/Fatmonk-event.git
+   cd Fatmonk-event/Server
+   npm install
+   ```
 
-json
-Copy
-Edit
-{
-"email": "john@example.com",
-"password": "123456"
-}
-📅 Event Routes /api/events (Protected)
-Set Bearer Token in Authorization Header
+2. **Configure Environment Variables**
+   Create a `.env` file in the root directory with the following content:
 
-Create Event
-http
-Copy
-Edit
-POST /api/events
-Body (form-data):
+   ```env
+   PORT=5000
+   MONGO_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+   ```
 
-eventName: string
+3. **Run the Server**
+   ```bash
+   npm run dev
+   ```
 
-description: string
+## API Endpoints
 
-date: YYYY-MM-DD
+### Auth Routes `/api/auth`
 
-time: HH:MM
+- **Register User**
 
-location: string
+  - **Endpoint:** `POST /api/auth/register`
+  - **Body (JSON):**
+    ```json
+    {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "123456"
+    }
+    ```
 
-bannerImage: image file
+- **Login User**
+  - **Endpoint:** `POST /api/auth/login`
+  - **Body (JSON):**
+    ```json
+    {
+      "email": "john@example.com",
+      "password": "123456"
+    }
+    ```
 
-Get All Events (with optional filters)
-http
-Copy
-Edit
-GET /api/events?location=New%20York&date=2025-05-01
-Get Event by ID
-http
-Copy
-Edit
-GET /api/events/:id
-Update Event
-http
-Copy
-Edit
-PUT /api/events/:id
-Body (form-data): (include only fields to update)
+### Event Routes `/api/events` (Protected)
 
-eventName, description, date, time, location, bannerImage
+Set Bearer Token in the Authorization Header.
 
-Delete Event
-http
-Copy
-Edit
-DELETE /api/events/:id
-🛠️ Technologies Used
-Node.js
+- **Create Event**
 
-Express.js
+  - **Endpoint:** `POST /api/events`
+  - **Body (form-data):**
+    - `name`: string
+    - `description`: string
+    - `date`: YYYY-MM-DD
+    - `time`: HH:MM
+    - `location`: string
+    - `bannerImage`: image file
 
-MongoDB & Mongoose
+- **Get All Events** (with optional filters)
 
-JSON Web Token (JWT)
+  - **Endpoint:** `GET /api/events?location=New%20York&date=2025-05-01`
 
-Multer (File upload)
+- **Get Event by ID**
 
-express-validator
+  - **Endpoint:** `GET /api/events/:id`
 
-dotenv
+- **Update Event**
 
-nodemon
+  - **Endpoint:** `PUT /api/events/:id`
+  - **Body (form-data):** (include only fields to update)
+    - `name`, `description`, `date`, `time`, `location`, `bannerImage`
+
+- **Delete Event**
+  - **Endpoint:** `DELETE /api/events/:id`
+
+## Technologies Used
+
+- Node.js
+- Express.js
+- MongoDB & Mongoose
+- JSON Web Token (JWT)
+- Multer (File upload)
+- express-validator
+- dotenv
+- nodemon
 
 📌 Notes
 Uploaded images are stored in uploads/ folder
