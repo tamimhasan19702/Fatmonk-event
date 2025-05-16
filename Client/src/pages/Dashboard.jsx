@@ -21,17 +21,20 @@ const Dashboard = () => {
     <>
       <Header />
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white">
-        <div className="max-w-screen-xl mx-auto px-4 py-5 flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-left mb-6">
+        <div className="max-w-screen-xl mx-auto px-4 py-5 flex flex-col sm:flex-row justify-between items-start md:items-start">
+          <h1 className="text-3xl font-bold text-left mb-6 sm:mb-0">
             Welcome {user?.name || "User"}
           </h1>
-          <Link
-            to="/event-form"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Add Event
-          </Link>
+          <div className="sm:mt-0 mt-3">
+            <Link
+              to="/event-form"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded sm:w-auto w-full block text-center">
+              Add Event
+            </Link>
+          </div>
         </div>
-        <div className="max-w-screen-xl mx-auto px-4">
+
+        <div className="max-w-screen-xl mx-auto px-4 md:px-8 py-4">
           {loading && <p>Loading events...</p>}
           {error && <p className="text-red-500">{error}</p>}
 

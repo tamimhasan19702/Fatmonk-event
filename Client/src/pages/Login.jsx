@@ -3,7 +3,7 @@
 import Footer from "../components/footer";
 import Header from "../components/Header";
 import { Link } from "react-router";
-import animation from "../assets/professionals.json";
+import animation from "../assets/website.json";
 import Lottie from "react-lottie";
 import LoginForm from "../components/loginForm";
 
