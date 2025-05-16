@@ -3,3 +3,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --color-primary: 59 130 246; /* blue-500 */
+  --color-secondary: 234 88 12; /* orange-600 */
+  --color-accent: 16 185 129; /* green-500 */
+  --color-background: 255 255 255; /* white */
+  --color-foreground: 31 41 55; /* gray-800 */
+}
+
+/* Optional dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: 17 24 39; /* gray-900 */
+    --color-foreground: 255 255 255; /* white */
+  }
+}
