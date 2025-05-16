@@ -28,7 +28,7 @@ router.put(
   "/:id",
   eventIdValidation,
   upload.single("bannerImage"),
-  eventValidation,
+
   eventController.updateEvent
 );
 

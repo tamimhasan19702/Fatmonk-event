@@ -97,19 +97,26 @@ exports.updateEvent = async (req, res) => {
       return res.status(403).json({ message: "Unauthorized" });
     }
 
-    const { name, description, date, time, location } = req.body;
-    if (name) event.name = name;
-    if (description !== undefined) event.description = description;
-    if (date) event.date = date;
-    if (time) event.time = time;
-    if (location) event.location = location;
+    const { eventName, description, date, time, location } = req.body;
 
+    if (eventName !== undefined) event.eventName = eventName;
+    if (description !== undefined) event.description = description;
+    if (date !== undefined) event.date = date;
+    if (time !== undefined) event.time = time;
+    if (location !== undefined) event.location = location;
+
+    // If a new banner image is uploaded, replace the old one
     if (req.file) {
+      if (event.bannerImage) {
+        const oldImagePath = path.join(__dirname, "..", event.bannerImage);
+        fs.unlink(oldImagePath, (err) => {
+          if (err) console.error("Failed to delete old image:", err);
+        });
+      }
       event.bannerImage = req.file.path;
     }
 
     await event.save();
-
     res.json(event);
   } catch (error) {
     console.error(error);
