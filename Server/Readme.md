@@ -142,21 +142,5 @@ Set Bearer Token in the Authorization Header.
 - dotenv
 - nodemon
 
-📌 Notes
-Uploaded images are stored in uploads/ folder
-
-On event update, if a new image is uploaded, the previous one is deleted
-
-All event routes are protected using JWT
-
-✅ Future Enhancements
-Password reset via email
-
-Event pagination and sorting
-
-Admin role support
-
-MongoDB GridFS for image storage
-
 📧 Author
 Tareq Monower
