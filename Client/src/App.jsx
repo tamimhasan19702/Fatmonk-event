@@ -9,6 +9,7 @@ import ProtectedRoute from "./routes/ProtectedRoutes";
 import PublicRoutes from "./routes/PublicRoutes";
 import SinglEvent from "./pages/SingleEvent";
 import AddEvent from "./pages/AddEvent";
+import EditEvent from "./pages/EditEvent";
 
 function App() {
   return (
@@ -51,6 +52,14 @@ function App() {
           element={
             <ProtectedRoute>
               <SinglEvent />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/edit-event/:id"
+          element={
+            <ProtectedRoute>
+              <EditEvent />
             </ProtectedRoute>
           }
         />

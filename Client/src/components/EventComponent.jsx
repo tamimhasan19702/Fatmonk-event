@@ -18,7 +18,10 @@ const EventComponent = ({ event }) => {
           {name}
         </h2>
         <p className="text-gray-700 dark:text-gray-300 text-sm mb-4">
-          {description}
+          {description.split(" ").splice(0, 20).join(" ")}
+          <span className="text-blue-500 hover:underline cursor-pointer">
+            ...read more
+          </span>
         </p>
 
         <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">

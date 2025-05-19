@@ -91,7 +91,7 @@ exports.updateEvent = async (req, res) => {
       return res.status(403).json({ message: "Unauthorized" });
     }
 
-    const { name, description, date, time, location } = req.body;
+    const { name, description, date, time, location, bannerImage } = req.body;
 
     if (name) event.name = name;
     if (description !== undefined) event.description = description;

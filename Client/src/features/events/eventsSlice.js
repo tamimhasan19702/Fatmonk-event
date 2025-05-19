@@ -44,7 +44,7 @@ export const fetchEventById = createAsyncThunk(
         },
       });
 
-      return response.data; // single event object
+      return response.data;
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || err.message);
     }
@@ -82,11 +82,10 @@ export const updateEvent = createAsyncThunk(
       const response = await axios.put(`${BASE_URL}/events/${id}`, formData, {
         headers: {
           Authorization: token ? `Bearer ${token}` : undefined,
-          "Content-Type": "multipart/form-data",
         },
       });
 
-      return response.data; // updated event object
+      return response.data;
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || err.message);
     }
