@@ -10,12 +10,14 @@ const {
   eventIdValidation,
   eventFilterValidation,
 } = require("../middleware/validators");
+const uploadImageToFirebase = require("../middleware/uploadToFirebase");
 
 router.use(protect);
 
 router.post(
   "/",
   upload.single("bannerImage"),
+  uploadImageToFirebase,
   eventValidation,
   eventController.createEvent
 );
@@ -28,7 +30,7 @@ router.put(
   "/:id",
   eventIdValidation,
   upload.single("bannerImage"),
-
+  uploadImageToFirebase,
   eventController.updateEvent
 );
 

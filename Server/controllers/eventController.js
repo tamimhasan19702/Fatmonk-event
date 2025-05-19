@@ -7,16 +7,9 @@ const path = require("path");
 // Create Event
 exports.createEvent = async (req, res) => {
   try {
-    const { name, description, date, time, location } = req.body;
-    const bannerImage = req.file ? req.file.path : "";
+    const { name, description, date, time, location, bannerImage } = req.body;
 
-    if (!name || !date || !time || !location) {
-      return res
-        .status(400)
-        .json({ message: "Please provide all required fields" });
-    }
-
-    const event = await Event.create({
+    const newEvent = new Event({
       user: req.user._id,
       name,
       description,
@@ -26,7 +19,8 @@ exports.createEvent = async (req, res) => {
       bannerImage,
     });
 
-    res.status(201).json(event);
+    await newEvent.save();
+    res.status(201).json(newEvent);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
@@ -97,23 +91,15 @@ exports.updateEvent = async (req, res) => {
       return res.status(403).json({ message: "Unauthorized" });
     }
 
-    const { eventName, description, date, time, location } = req.body;
+    const { name, description, date, time, location } = req.body;
 
-    if (eventName !== undefined) event.eventName = eventName;
+    if (name) event.name = name;
     if (description !== undefined) event.description = description;
-    if (date !== undefined) event.date = date;
-    if (time !== undefined) event.time = time;
-    if (location !== undefined) event.location = location;
-
-    // If a new banner image is uploaded, replace the old one
-    if (req.file) {
-      if (event.bannerImage) {
-        const oldImagePath = path.join(__dirname, "..", event.bannerImage);
-        fs.unlink(oldImagePath, (err) => {
-          if (err) console.error("Failed to delete old image:", err);
-        });
-      }
-      event.bannerImage = req.file.path;
+    if (date) event.date = date;
+    if (time) event.time = time;
+    if (location) event.location = location;
+    if (bannerImage) {
+      event.bannerImage = bannerImage;
     }
 
     await event.save();
@@ -124,7 +110,7 @@ exports.updateEvent = async (req, res) => {
   }
 };
 
-// Delete Event
+// Delete Event\
 exports.deleteEvent = async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
