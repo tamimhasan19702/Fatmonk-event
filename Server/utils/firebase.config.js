@@ -2,7 +2,7 @@
 
 var admin = require("firebase-admin");
 
-var serviceAccount = require("./react-social-1-firebase-adminsdk-e14cd-c5b5bee2d3.json");
+var serviceAccount = require("./react-social-1-firebase-adminsdk-e14cd-0f53f62158.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),

@@ -49,10 +49,7 @@ const SingleEvent = () => {
           ) : eventDetails ? (
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
               <img
-                src={`https://fatmonk-event.onrender.com/${eventDetails.bannerImage.replace(
-                  /\\/g,
-                  "/"
-                )}`}
+                src={eventDetails.bannerImage}
                 alt="Event Banner"
                 className="w-full h-64 object-cover rounded-md mb-6"
               />

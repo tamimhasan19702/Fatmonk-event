@@ -9,18 +9,9 @@ const EventComponent = ({ event }) => {
     day: "numeric",
   });
 
-  console.log(bannerImage);
-
   return (
     <div className="w-full mx-auto bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
-      <img
-        src={`https://fatmonk-event.onrender.com/${bannerImage.replace(
-          /\\/g,
-          "/"
-        )}`}
-        className="w-full h-48 object-cover"
-        alt={name}
-      />
+      <img src={bannerImage} className="w-full h-48 object-cover" alt={name} />
 
       <div className="p-5">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">

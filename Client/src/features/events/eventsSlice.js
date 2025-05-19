@@ -4,9 +4,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // Base URL
-const BASE_URL =
-  "https://fatmonk-event.onrender.com/api/events" ||
-  "http://localhost:5000/api/events";
+const BASE_URL = "http://localhost:5000/api/events";
 
 // Get all events (with optional filters)
 export const fetchEvents = createAsyncThunk(

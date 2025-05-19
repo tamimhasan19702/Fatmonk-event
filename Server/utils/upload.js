@@ -1,22 +1,13 @@
 /** @format */
 
 const multer = require("multer");
-const path = require("path");
 
-// Set storage destination and filename
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  },
-});
+// Use memory storage so we can access req.file.buffer
+const storage = multer.memoryStorage();
 
-// File type validation
 const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpeg|jpg|png|gif/;
-  const ext = allowedTypes.test(path.extname(file.originalname).toLowerCase());
+  const allowedTypes = /jpeg|jpg|webp/;
+  const ext = allowedTypes.test(file.originalname.toLowerCase());
   const mime = allowedTypes.test(file.mimetype);
   if (ext && mime) {
     return cb(null, true);
