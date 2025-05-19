@@ -31,7 +31,6 @@ router.put(
   eventIdValidation,
   upload.single("bannerImage"),
   uploadImageToFirebase,
-
   eventController.updateEvent
 );
 

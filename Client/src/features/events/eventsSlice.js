@@ -67,7 +67,8 @@ export const createEvent = createAsyncThunk(
         },
       });
 
-      return response.data; // new event object
+      console.log(response.data);
+      return response.data;
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || err.message);
     }
