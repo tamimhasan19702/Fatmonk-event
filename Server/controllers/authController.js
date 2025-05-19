@@ -80,7 +80,7 @@ exports.login = async (req, res) => {
 
 exports.getUser = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
+    const user = await User.findById(req.params.id).select("-password");
     res.json(user);
   } catch (error) {
     console.error(error);

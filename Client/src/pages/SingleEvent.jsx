@@ -5,19 +5,17 @@ import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/footer";
 import { fetchEventById, deleteEvent } from "../features/events/eventsSlice";
-import { getUser } from "../features/auth/authSlice";
+import { getUser } from "../features/events/eventsSlice";
 
 const SingleEvent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const {
-    user,
-    userInfo,
-    loading: userLoading,
-  } = useSelector((state) => state.auth);
-  const { eventDetails, loading } = useSelector((state) => state.events);
+  const { user } = useSelector((state) => state.auth);
+  const { eventDetails, loading, eventOwner, eventOwnerLoading } = useSelector(
+    (state) => state.events
+  );
 
   useEffect(() => {
     dispatch(fetchEventById(id));
@@ -70,9 +68,7 @@ const SingleEvent = () => {
 
               <p className="text-sm text-gray-500 mt-4">
                 <strong>Created by:</strong>{" "}
-                {userLoading
-                  ? "Loading..."
-                  : userInfo?.name || userInfo?.email || "Unknown"}
+                {eventOwnerLoading ? "Loading..." : eventOwner?.name}
               </p>
 
               {isOwner && (

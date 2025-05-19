@@ -34,7 +34,7 @@ const uploadImageToFirebase = async (req, res, next) => {
         bucket.name
       }/o/${encodeURIComponent(blob.name)}?alt=media`;
       req.body.bannerImage = publicUrl;
-      console.log("Upload successful:", publicUrl);
+
       next();
     });
 

@@ -36,18 +36,6 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const getUser = createAsyncThunk(
-  "auth/getUser",
-  async (id, { rejectWithValue }) => {
-    try {
-      const response = await axios.get(`${BASE_URL}/auth/getuser/${id}`);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
 const authSlice = createSlice({
   name: "auth",
   initialState: {

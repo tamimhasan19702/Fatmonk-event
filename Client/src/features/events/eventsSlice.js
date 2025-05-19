@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // Base URL
-const BASE_URL = "http://localhost:5000/api/events";
+const BASE_URL = "http://localhost:5000/api";
 
 // Get all events (with optional filters)
 export const fetchEvents = createAsyncThunk(
@@ -15,7 +15,7 @@ export const fetchEvents = createAsyncThunk(
       const token = getState().auth.user?.token;
 
       const response = await axios.get(
-        `${BASE_URL}${queryParams ? `?${queryParams}` : ""}`,
+        `${BASE_URL}/events/${queryParams ? `?${queryParams}` : ""}`,
         {
           headers: {
             Authorization: token ? `Bearer ${token}` : undefined,
@@ -38,7 +38,7 @@ export const fetchEventById = createAsyncThunk(
     try {
       const token = getState().auth.user?.token;
 
-      const response = await axios.get(`${BASE_URL}/${id}`, {
+      const response = await axios.get(`${BASE_URL}/events/${id}`, {
         headers: {
           Authorization: token ? `Bearer ${token}` : undefined,
         },
@@ -58,14 +58,13 @@ export const createEvent = createAsyncThunk(
     try {
       const token = getState().auth.user?.token;
 
-      const response = await axios.post(BASE_URL, formData, {
+      const response = await axios.post(`${BASE_URL}/events`, formData, {
         headers: {
           Authorization: token ? `Bearer ${token}` : undefined,
           "Content-Type": "multipart/form-data",
         },
       });
 
-      console.log(response.data);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || err.message);
@@ -80,7 +79,7 @@ export const updateEvent = createAsyncThunk(
     try {
       const token = getState().auth.user?.token;
 
-      const response = await axios.put(`${BASE_URL}/${id}`, formData, {
+      const response = await axios.put(`${BASE_URL}/events/${id}`, formData, {
         headers: {
           Authorization: token ? `Bearer ${token}` : undefined,
           "Content-Type": "multipart/form-data",
@@ -101,7 +100,7 @@ export const deleteEvent = createAsyncThunk(
     try {
       const token = getState().auth.user?.token;
 
-      await axios.delete(`${BASE_URL}/${id}`, {
+      await axios.delete(`${BASE_URL}/events/${id}`, {
         headers: {
           Authorization: token ? `Bearer ${token}` : undefined,
         },
@@ -114,10 +113,24 @@ export const deleteEvent = createAsyncThunk(
   }
 );
 
+export const getUser = createAsyncThunk(
+  "events/getUser",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`${BASE_URL}/auth/getuser/${id}`);
+      console.log("User data from API:", response.data);
+      return response.data; // should be the user object
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
 // Initial state
 const initialState = {
   events: [],
   eventDetails: null,
+  eventOwner: null,
   loading: false,
   error: null,
 };
@@ -202,6 +215,21 @@ const eventSlice = createSlice({
       .addCase(deleteEvent.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+
+      // Get user
+      .addCase(getUser.pending, (state) => {
+        state.eventOwnerLoading = true;
+        state.error = null;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.eventOwnerLoading = false;
+        state.eventOwner = action.payload;
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        state.eventOwnerLoading = false;
+        state.error = action.payload;
+        state.eventOwner = null;
       });
   },
 });
