@@ -20,3 +20,5 @@ yarn-error.log*
 # Build directories
 dist/
 build/
+
+Server/utils/react-social-1-firebase-adminsdk-e14cd-bf107d493b.json
