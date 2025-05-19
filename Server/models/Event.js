@@ -31,7 +31,7 @@ const eventSchema = new mongoose.Schema(
       required: [true, "Please enter a location"],
     },
     bannerImage: {
-      type: String, // URL or filename if using file uploads
+      type: String,
       default: "",
     },
   },

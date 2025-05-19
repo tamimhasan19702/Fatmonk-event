@@ -3,7 +3,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const BASE_URL = "https://fatmonk-event.onrender.com/api";
+const BASE_URL =
+  "https://fatmonk-event.onrender.com/api" || "http://localhost:5000/api";
 
 export const registerUser = createAsyncThunk(
   "auth/register",
@@ -32,6 +33,18 @@ export const loginUser = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message || "Login failed");
+    }
+  }
+);
+
+export const getUser = createAsyncThunk(
+  "auth/getUser",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/auth/getuser/${id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
   }
 );

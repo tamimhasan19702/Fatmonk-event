@@ -5,17 +5,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchEvents } from "../features/events/eventsSlice";
 import Header from "../components/Header";
 import Footer from "../components/footer";
-import EventComponent from "../components/eventComponent";
+import EventComponent from "../components/EventComponent";
 import { Link } from "react-router";
+import { useNavigate } from "react-router";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { events, loading, error } = useSelector((state) => state.events);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchEvents());
   }, [dispatch]);
+
+  const handleEventClick = (eventId) => {
+    navigate(`/single-event/${eventId}`);
+  };
 
   return (
     <>
@@ -27,7 +33,7 @@ const Dashboard = () => {
           </h1>
           <div className="sm:mt-0 mt-3">
             <Link
-              to="/event-form"
+              to="/add-event"
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded sm:w-auto w-full block text-center">
               Add Event
             </Link>
@@ -41,7 +47,12 @@ const Dashboard = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {events?.length > 0
               ? events.map((event) => (
-                  <EventComponent key={event._id} event={event} />
+                  <div
+                    key={event._id}
+                    className="cursor-pointer"
+                    onClick={() => handleEventClick(event._id)}>
+                    <EventComponent event={event} />
+                  </div>
                 ))
               : !loading && <p>No events found.</p>}
           </div>

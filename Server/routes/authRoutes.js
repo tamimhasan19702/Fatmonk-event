@@ -10,5 +10,6 @@ const {
 
 router.post("/register", registerValidation, authController.register);
 router.post("/login", loginValidation, authController.login);
+router.post("/getuser/:id", authController.getUser);
 
 module.exports = router;

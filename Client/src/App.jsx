@@ -5,15 +5,31 @@ import Home from "./pages/Home";
 import "./App.css";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
-import EventForm from "./pages/EventForm";
 import ProtectedRoute from "./routes/ProtectedRoutes";
+import PublicRoutes from "./routes/PublicRoutes";
+import SinglEvent from "./pages/SingleEvent";
+import AddEvent from "./pages/AddEvent";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <PublicRoutes>
+              <Home />
+            </PublicRoutes>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <PublicRoutes>
+              <Login />
+            </PublicRoutes>
+          }
+        />
         <Route
           path="/dashboard"
           element={
@@ -23,10 +39,18 @@ function App() {
           }
         />
         <Route
-          path="/event-form"
+          path="/add-event"
           element={
             <ProtectedRoute>
-              <EventForm />
+              <AddEvent />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/single-event/:id"
+          element={
+            <ProtectedRoute>
+              <SinglEvent />
             </ProtectedRoute>
           }
         />
