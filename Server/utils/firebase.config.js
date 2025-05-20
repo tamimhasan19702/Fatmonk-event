@@ -1,8 +1,14 @@
 /** @format */
+const dotenv = require("dotenv");
+dotenv.config();
 
 var admin = require("firebase-admin");
 
-var serviceAccount = require("../../react-social-1-firebase-adminsdk-e14cd-65b4bbb7ac.json");
+var serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG);
+
+if (serviceAccount.private_key) {
+  serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, "\n");
+}
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
