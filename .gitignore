@@ -21,4 +21,4 @@ yarn-error.log*
 dist/
 build/
 
-Server/utils/imageStorage.json
+react-social-1-firebase-adminsdk-e14cd-65b4bbb7ac.json

@@ -3,8 +3,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const BASE_URL =
-  "https://fatmonk-event.onrender.com" || "http://localhost:5000/api";
+const BASE_URL = "http://localhost:5000/api";
 
 export const registerUser = createAsyncThunk(
   "auth/register",
