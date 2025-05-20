@@ -91,6 +91,31 @@ Backend API Endpoints (Sample)
 
 How to Run Locally
 
-1. Clone the repo:
+git clone https://github.com/tamimhasan19702/Fatmonk-event.git
+cd event-dashboard 2. Install dependencies:
+bash
+Copy
+Edit
+npm install 3. Add your .env (if applicable):
+bash
+Copy
+Edit
+REACT_APP_API_BASE_URL=https://fatmonk-event.onrender.com/api 4. Start development server:
+bash
+Copy
+Edit
+npm run dev
+🧪 Future Improvements
+Add search/filter events
 
+Add pagination
+
+Add comments or RSVPs
+
+Role-based access (admin, user)
+
+Better error boundaries
+
+🙌 Author
+Tareq Monower
 Professional MERN Stack & WordPress Developer
