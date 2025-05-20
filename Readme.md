@@ -2,6 +2,9 @@
 
 ## 🎉 Event Management Web App
 
+Frontend Live URL: https://fatmonk-event.vercel.app/
+Backend Live URL: https://fatmonk-event.onrender.com
+
 This is a full-stack event management application built with the MERN stack (MongoDB, Express.js, React, Node.js). It allows users to register, log in, create events with banner images, view a list of all events, update or delete their events. The backend handles user authentication using JWT, and event images are uploaded via Multer and saved in the server's filesystem.
 
 The frontend is built with React and connects to the Express API using Axios. Users can interact with the platform to manage their events in a clean and responsive UI. Filtering, validation, protected routes, and image handling are all supported.

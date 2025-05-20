@@ -2,6 +2,8 @@
 
 # 🎉 Event Management REST API
 
+Backend Live URL: https://fatmonk-event.onrender.com
+
 A RESTful backend for managing events, built with **Node.js**, **Express.js**, **MongoDB**, and **JWT authentication**. Users can register, login, create, update, delete, and filter events. Images can be uploaded via `multer`.
 
 ---
