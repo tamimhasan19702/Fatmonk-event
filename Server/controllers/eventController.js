@@ -38,12 +38,34 @@ exports.getEvents = async (req, res) => {
       page = 1,
       limit = 10,
     } = req.query;
+
     const query = {};
 
-    if (date) query.date = new Date(date);
-    if (upcomingOnly === "true")
-      query.date = { ...query.date, $gte: new Date() };
-    if (location) query.location = { $regex: location, $options: "i" };
+    // Date filtering
+    if (date) {
+      const parsedDate = new Date(date);
+      const startOfDay = new Date(parsedDate);
+      startOfDay.setHours(0, 0, 0, 0);
+
+      const endOfDay = new Date(parsedDate);
+      endOfDay.setHours(23, 59, 59, 999);
+
+      query.date = { $gte: startOfDay, $lte: endOfDay };
+    }
+
+    if (upcomingOnly === "true") {
+      const now = new Date();
+
+      if (query.date) {
+        query.date.$gte = now > query.date.$gte ? now : query.date.$gte;
+      } else {
+        query.date = { $gte: now };
+      }
+    }
+
+    if (location) {
+      query.location = { $regex: location, $options: "i" };
+    }
 
     const skip = (parseInt(page) - 1) * parseInt(limit);
     const sortOption = sort === "desc" ? -1 : 1;

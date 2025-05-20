@@ -24,8 +24,20 @@ const Dashboard = () => {
 
   const handleFilter = () => {
     const filters = {};
-    if (date) filters.date = date;
-    if (location) filters.location = location;
+
+    if (date) {
+      const [day, month, year] = date.split("/");
+      const parsedDate = new Date(`${year}-${month}-${day}`);
+
+      if (!isNaN(parsedDate)) {
+        filters.date = parsedDate.toISOString();
+      }
+    }
+
+    if (location) {
+      filters.location = location;
+    }
+
     dispatch(fetchEvents(filters));
   };
 
